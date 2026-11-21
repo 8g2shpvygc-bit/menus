@@ -9,268 +9,382 @@
 <style>
 :root{--g:#2f855a;--g2:#e6f4ec;--bg:#f6f7f5;--tx:#1f2933;--mu:#6b7780;--bd:#dfe4e0;--wh:#fff;--rd:#c53030}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx);padding-bottom:70px}
+body{margin:0;font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx);padding-bottom:75px}
 header{background:var(--g);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:5}
 header h1{margin:0;font-size:18px}
 nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--wh);border-top:1px solid var(--bd);z-index:5}
-nav button{flex:1;padding:10px 0;border:0;background:none;font-size:12px;color:var(--mu)}
+nav button{flex:1;padding:8px 0;border:0;background:none;font-size:12px;color:var(--mu)}
 nav button.on{color:var(--g);font-weight:700}
 nav button span{display:block;font-size:20px}
 main{padding:12px;max-width:700px;margin:auto}
 .card{background:var(--wh);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:12px}
-.day h3{margin:0 0 8px;font-size:16px}
-.slot{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--bd);font-size:14px}
-.slot:first-of-type{border-top:0}
-.slot .lbl{width:78px;color:var(--mu);font-size:12px}
+.card h3{margin:0 0 8px;font-size:16px}
+.slot{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--bd);font-size:14px;cursor:pointer}
+.slot.first{border-top:0}
+.slot .lbl{width:74px;color:var(--mu);font-size:12px;flex-shrink:0}
 .slot .meal{flex:1}
 .slot .meal b{display:block}
 .slot .meta{font-size:11px;color:var(--mu)}
-.empty{color:var(--mu);font-style:italic}
-button.p,button.s{border:0;border-radius:8px;padding:10px 14px;font-size:14px}
-button.p{background:var(--g);color:#fff}
-button.s{background:var(--g2);color:var(--g)}
-button.d{background:none;border:0;color:var(--rd);font-size:13px}
-input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font-size:15px;margin:4px 0 8px;background:#fff}
+.empty{color:#a0aab2;font-style:italic}
+button.btn{background:var(--g);color:#fff;border:0;border-radius:8px;padding:10px 14px;font-size:14px;margin:2px 4px 2px 0}
+button.btn.sec{background:var(--g2);color:var(--g)}
+button.btn.dng{background:#fde8e8;color:var(--rd)}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font-size:15px;margin:4px 0 8px;font-family:inherit;background:#fff}
 label{font-size:13px;color:var(--mu)}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
 .chip{padding:6px 12px;border-radius:20px;border:1px solid var(--bd);font-size:13px;background:#fff}
 .chip.on{background:var(--g);color:#fff;border-color:var(--g)}
-.tag{display:inline-block;font-size:11px;background:var(--g2);color:var(--g);padding:2px 8px;border-radius:10px;margin:2px 4px 0 0}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;z-index:20}
-.modal.show{display:flex}
-.sheet{background:#fff;width:100%;max-height:88vh;overflow:auto;border-radius:16px 16px 0 0;padding:16px}
-.row{display:flex;gap:8px;align-items:center}
-.li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd)}
-.li input{width:auto;margin:0;transform:scale(1.3)}
-.li.done span{text-decoration:line-through;color:var(--mu)}
-.li span{flex:1}
-h2.cat{font-size:13px;text-transform:uppercase;color:var(--g);margin:14px 0 4px;letter-spacing:.5px}
-.hint{font-size:12px;color:var(--mu);margin:6px 0}
+.tag{display:inline-block;font-size:11px;background:var(--g2);color:var(--g);border-radius:10px;padding:2px 8px;margin:2px 4px 2px 0}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.modal>div{background:#fff;width:100%;max-width:700px;max-height:88vh;overflow:auto;border-radius:16px 16px 0 0;padding:16px}
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--bd)}
+.row.done span.t{text-decoration:line-through;color:#a0aab2}
+.row input[type=checkbox]{width:22px;height:22px;margin:0}
+.row span.t{flex:1}
+.row .x{color:var(--rd);border:0;background:none;font-size:18px}
+.cat{font-size:12px;font-weight:700;color:var(--g);text-transform:uppercase;margin:14px 0 2px}
+.tip{background:#fff8e1;border:1px solid #f3e0a0;border-radius:10px;padding:10px;font-size:13px;margin-bottom:12px}
+.wk{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.wk button{border:1px solid var(--bd);background:#fff;border-radius:8px;padding:8px 14px;font-size:16px}
 </style>
 </head>
 <body>
 <header><h1 id="title">🥗 Menus de la semaine</h1></header>
 <main id="app"></main>
 <nav id="nav"></nav>
-<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
 
 <script>
 const DAYS=["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"];
-const SLOTS=[["pdj","Petit-déj ☀️"],["midi","Midi 🍽️"],["col","Collation 🍎"],["soir","Soir 🌙"]];
-const PEOPLE=[["moi","Moi",1],["copine","Copine",1],["bebe","Bébé",0.4]];
-const CATS=["Fruits & légumes","Viandes & poissons","Frais & crèmerie","Épicerie","Surgelé","Autre"];
+const SLOTS=[
+ {id:"bk",label:"Petit-déj",ico:"☕"},
+ {id:"lu",label:"Midi",ico:"🍽️"},
+ {id:"sn",label:"Collation",ico:"🍎"},
+ {id:"di",label:"Soir",ico:"🌙"}
+];
+const PEOPLE=[{id:"moi",label:"Moi",w:1},{id:"copine",label:"Copine",w:1},{id:"bebe",label:"Bébé",w:0.4}];
+const CATS=["Fruits & légumes","Viandes & poissons","Crèmerie & œufs","Épicerie","Surgelés","Boulangerie","Autre"];
 
-const SEED=[
-{id:"r1",nom:"Porridge flocons d'avoine + banane",tps:5,batch:false,tags:["Petit-déj","Rapide"],ing:[["Flocons d'avoine",40,"g","Épicerie"],["Lait",25,"cl","Frais & crèmerie"],["Banane",1,"pièce","Fruits & légumes"]]},
-{id:"r2",nom:"Skyr/yaourt grec + fruits + noix",tps:3,batch:false,tags:["Petit-déj","Collation","Sans cuisson"],ing:[["Yaourt grec",150,"g","Frais & crèmerie"],["Fruit de saison",1,"pièce","Fruits & légumes"],["Noix",15,"g","Épicerie"]]},
-{id:"r3",nom:"Tartines complètes œuf + avocat",tps:8,batch:false,tags:["Petit-déj","Rapide"],ing:[["Pain complet",2,"tranche","Épicerie"],["Œuf",2,"pièce","Frais & crèmerie"],["Avocat",0.5,"pièce","Fruits & légumes"]]},
-{id:"r4",nom:"Chili sin carne (batch)",tps:35,batch:true,tags:["Batch","Micro-ondable","Végé"],ing:[["Haricots rouges (boîte)",0.5,"boîte","Épicerie"],["Tomates concassées",200,"g","Épicerie"],["Oignon",0.5,"pièce","Fruits & légumes"],["Riz complet",70,"g","Épicerie"],["Maïs",50,"g","Épicerie"]]},
-{id:"r5",nom:"Curry de pois chiches & épinards (batch)",tps:30,batch:true,tags:["Batch","Micro-ondable","Végé"],ing:[["Pois chiches (boîte)",0.5,"boîte","Épicerie"],["Lait de coco",10,"cl","Épicerie"],["Épinards surgelés",100,"g","Surgelé"],["Riz basmati",70,"g","Épicerie"],["Oignon",0.5,"pièce","Fruits & légumes"]]},
-{id:"r6",nom:"Bolognaise de dinde + pâtes complètes",tps:30,batch:true,tags:["Batch","Micro-ondable","Bébé OK"],ing:[["Dinde hachée",120,"g","Viandes & poissons"],["Tomates concassées",150,"g","Épicerie"],["Carotte",1,"pièce","Fruits & légumes"],["Pâtes complètes",80,"g","Épicerie"],["Oignon",0.5,"pièce","Fruits & légumes"]]},
-{id:"r7",nom:"Poêlée de poulet, légumes & riz",tps:20,batch:false,tags:["Rapide","Bébé OK"],ing:[["Blanc de poulet",120,"g","Viandes & poissons"],["Légumes surgelés poêlée",200,"g","Surgelé"],["Riz",70,"g","Épicerie"]]},
-{id:"r8",nom:"Omelette + salade + pain",tps:12,batch:false,tags:["Rapide","Bébé OK"],ing:[["Œuf",3,"pièce","Frais & crèmerie"],["Salade",80,"g","Fruits & légumes"],["Pain complet",2,"tranche","Épicerie"]]},
-{id:"r9",nom:"Saumon + patate douce au four",tps:30,batch:false,tags:["Bébé OK","Oméga-3"],ing:[["Pavé de saumon",1,"pièce","Viandes & poissons"],["Patate douce",1,"pièce","Fruits & légumes"],["Brocoli",150,"g","Fruits & légumes"]]},
-{id:"r10",nom:"Soupe de lentilles corail (batch)",tps:25,batch:true,tags:["Batch","Micro-ondable","Végé","Bébé OK"],ing:[["Lentilles corail",60,"g","Épicerie"],["Carotte",1,"pièce","Fruits & légumes"],["Oignon",0.5,"pièce","Fruits & légumes"],["Lait de coco",5,"cl","Épicerie"]]},
-{id:"r11",nom:"Salade bowl thon, quinoa, légumes",tps:15,batch:false,tags:["Travail","Froid"],ing:[["Quinoa",60,"g","Épicerie"],["Thon (boîte)",0.5,"boîte","Épicerie"],["Concombre",0.5,"pièce","Fruits & légumes"],["Tomate",1,"pièce","Fruits & légumes"]]},
-{id:"r12",nom:"Wrap poulet-crudités",tps:10,batch:false,tags:["Travail","Rapide"],ing:[["Tortilla complète",1,"pièce","Épicerie"],["Blanc de poulet",80,"g","Viandes & poissons"],["Salade",30,"g","Fruits & légumes"],["Fromage frais",30,"g","Frais & crèmerie"]]},
-{id:"r13",nom:"Pomme + poignée d'amandes",tps:1,batch:false,tags:["Collation","Sans cuisson"],ing:[["Pomme",1,"pièce","Fruits & légumes"],["Amandes",20,"g","Épicerie"]]},
-{id:"r14",nom:"Houmous + bâtonnets de légumes + pain",tps:5,batch:false,tags:["Collation","Sans cuisson"],ing:[["Houmous",60,"g","Frais & crèmerie"],["Carotte",1,"pièce","Fruits & légumes"],["Pain complet",1,"tranche","Épicerie"]]},
-{id:"r15",nom:"Gratin de courgettes & jambon",tps:35,batch:true,tags:["Batch","Bébé OK"],ing:[["Courgette",2,"pièce","Fruits & légumes"],["Jambon blanc",2,"tranche","Viandes & poissons"],["Crème légère",10,"cl","Frais & crèmerie"],["Fromage râpé",30,"g","Frais & crèmerie"]]}
+// Recettes de départ : ingrédients pour 1 adulte
+const DEFAULT_RECIPES=[
+{id:"r1",name:"Porridge banane-noix",time:5,tags:["petit-déj","rapide","sans cuisson"],batch:false,
+ ing:[{n:"Flocons d'avoine",q:50,u:"g",c:"Épicerie"},{n:"Lait",q:200,u:"ml",c:"Crèmerie & œufs"},{n:"Banane",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Noix",q:15,u:"g",c:"Épicerie"}],
+ steps:"Chauffer flocons + lait 3 min (ou micro-ondes 2 min). Ajouter banane en rondelles et noix."},
+{id:"r2",name:"Skyr, fruits & flocons",time:2,tags:["petit-déj","collation","sans cuisson","rapide"],batch:false,
+ ing:[{n:"Skyr nature",q:150,u:"g",c:"Crèmerie & œufs"},{n:"Fruits de saison",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Flocons d'avoine",q:25,u:"g",c:"Épicerie"}],
+ steps:"Mélanger. Se transporte très bien au travail."},
+{id:"r3",name:"Œufs brouillés & tartines",time:10,tags:["petit-déj","rapide"],batch:false,
+ ing:[{n:"Œufs",q:2,u:"pièce",c:"Crèmerie & œufs"},{n:"Pain complet",q:2,u:"tranche",c:"Boulangerie"},{n:"Beurre",q:5,u:"g",c:"Crèmerie & œufs"}],
+ steps:"Brouiller les œufs à feu doux. Servir sur pain grillé."},
+{id:"r4",name:"Chili sin carne (batch)",time:35,tags:["batch","végétarien","congélation","pas cher"],batch:true,
+ ing:[{n:"Haricots rouges (boîte)",q:120,u:"g",c:"Épicerie"},{n:"Tomates concassées",q:150,u:"g",c:"Épicerie"},{n:"Maïs",q:40,u:"g",c:"Épicerie"},{n:"Poivron",q:0.5,u:"pièce",c:"Fruits & légumes"},{n:"Oignon",q:0.5,u:"pièce",c:"Fruits & légumes"},{n:"Riz",q:70,u:"g",c:"Épicerie"}],
+ steps:"Revenir oignon + poivron, ajouter le reste, mijoter 20 min. Riz à part. Congeler en portions. Sans piment pour bébé."},
+{id:"r5",name:"Bolognaise de lentilles (batch)",time:35,tags:["batch","végétarien","congélation","pas cher"],batch:true,
+ ing:[{n:"Lentilles corail",q:60,u:"g",c:"Épicerie"},{n:"Tomates concassées",q:150,u:"g",c:"Épicerie"},{n:"Carotte",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Oignon",q:0.5,u:"pièce",c:"Fruits & légumes"},{n:"Pâtes complètes",q:80,u:"g",c:"Épicerie"}],
+ steps:"Cuire lentilles + légumes + tomates 20 min. Servir sur pâtes. Se congèle très bien."},
+{id:"r6",name:"Soupe de légumes & œuf dur",time:30,tags:["batch","léger","pas cher"],batch:true,
+ ing:[{n:"Pommes de terre",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Carotte",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Poireau",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Œufs",q:1,u:"pièce",c:"Crèmerie & œufs"},{n:"Pain complet",q:1,u:"tranche",c:"Boulangerie"}],
+ steps:"Cuire les légumes 20 min, mixer. Servir avec œuf dur et pain. Se transporte en bocal."},
+{id:"r7",name:"Poulet rôti, patates douces & brocoli",time:40,tags:["batch","plaque","protéiné"],batch:true,
+ ing:[{n:"Cuisses de poulet",q:1,u:"pièce",c:"Viandes & poissons"},{n:"Patate douce",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Brocoli",q:150,u:"g",c:"Fruits & légumes"},{n:"Huile d'olive",q:10,u:"ml",c:"Épicerie"}],
+ steps:"Tout sur une plaque, four 200 °C 35 min. Peu de vaisselle."},
+{id:"r8",name:"Pâtes thon-tomate-courgette",time:15,tags:["rapide","pas cher"],batch:false,
+ ing:[{n:"Pâtes complètes",q:90,u:"g",c:"Épicerie"},{n:"Thon (boîte)",q:60,u:"g",c:"Épicerie"},{n:"Tomates concassées",q:100,u:"g",c:"Épicerie"},{n:"Courgette",q:0.5,u:"pièce",c:"Fruits & légumes"}],
+ steps:"Cuire les pâtes, faire revenir courgette, ajouter tomates et thon."},
+{id:"r9",name:"Omelette aux légumes & salade",time:12,tags:["rapide","soir"],batch:false,
+ ing:[{n:"Œufs",q:3,u:"pièce",c:"Crèmerie & œufs"},{n:"Épinards surgelés",q:80,u:"g",c:"Surgelés"},{n:"Pain complet",q:2,u:"tranche",c:"Boulangerie"}],
+ steps:"Omelette avec épinards. Servir avec pain."},
+{id:"r10",name:"Houmous, crudités & pain pita",time:5,tags:["collation","sans cuisson","travail"],batch:false,
+ ing:[{n:"Houmous",q:60,u:"g",c:"Épicerie"},{n:"Carotte",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Concombre",q:0.25,u:"pièce",c:"Fruits & légumes"},{n:"Pain pita",q:1,u:"pièce",c:"Boulangerie"}],
+ steps:"Couper les crudités. Idéal collation de 17h30 pour tenir jusqu'au dîner tardif."},
+{id:"r11",name:"Pomme, fromage & amandes",time:1,tags:["collation","sans cuisson","travail"],batch:false,
+ ing:[{n:"Pomme",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Fromage (portion)",q:30,u:"g",c:"Crèmerie & œufs"},{n:"Amandes",q:15,u:"g",c:"Épicerie"}],
+ steps:"Zéro préparation. Protéines + fibres = satiété."},
+{id:"r12",name:"Bowl riz, pois chiches & légumes (travail)",time:20,tags:["batch","travail","micro-ondes","végétarien"],batch:true,
+ ing:[{n:"Riz",q:70,u:"g",c:"Épicerie"},{n:"Pois chiches (boîte)",q:100,u:"g",c:"Épicerie"},{n:"Poivron",q:0.5,u:"pièce",c:"Fruits & légumes"},{n:"Courgette",q:0.5,u:"pièce",c:"Fruits & légumes"},{n:"Huile d'olive",q:10,u:"ml",c:"Épicerie"}],
+ steps:"Cuire riz, rôtir légumes, mélanger avec pois chiches. Se réchauffe au micro-ondes."},
+{id:"r13",name:"Gratin de pâtes & légumes (batch)",time:40,tags:["batch","congélation","bébé ok"],batch:true,
+ ing:[{n:"Pâtes complètes",q:80,u:"g",c:"Épicerie"},{n:"Courgette",q:1,u:"pièce",c:"Fruits & légumes"},{n:"Lait",q:100,u:"ml",c:"Crèmerie & œufs"},{n:"Fromage râpé",q:25,u:"g",c:"Crèmerie & œufs"}],
+ steps:"Mélanger pâtes cuites, courgette, lait, fromage. Four 20 min. Se congèle en portions."}
 ];
 
+// ---------- Etat & stockage ----------
+const KEY="menusApp_v1";
+function weekStart(d){const x=new Date(d);const k=(x.getDay()+6)%7;x.setDate(x.getDate()-k);x.setHours(0,0,0,0);return x}
+function wkId(d){const x=weekStart(d);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")}
 let S=load();
-let view="plan",modalCtx=null;
-
 function load(){
-  try{const d=JSON.parse(localStorage.getItem("menusApp"));if(d&&d.v===1)return d}catch(e){}
-  return{v:1,recettes:SEED,plan:{},extra:[],checked:{}};
+  try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.recipes)return s}catch(e){}
+  return {recipes:DEFAULT_RECIPES,plans:{},shop:{},extra:[]};
 }
-function save(){localStorage.setItem("menusApp",JSON.stringify(S))}
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+
+let tab="plan", curWeek=weekStart(new Date()), editRecipe=null;
+
+// ---------- Utilitaires ----------
 const $=s=>document.querySelector(s);
-const uid=()=>"r"+Date.now()+Math.floor(Math.random()*999);
-const getR=id=>S.recettes.find(r=>r.id===id);
-const key=(d,s)=>d+"_"+s;
+function esc(t){return String(t).replace(/[&<>"']/g,c=>({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]))}
+function getPlan(){const id=wkId(curWeek);if(!S.plans[id])S.plans[id]={};return S.plans[id]}
+function slotKey(d,s){return d+"_"+s}
+function recipeById(id){return S.recipes.find(r=>r.id===id)}
+function fmtDate(d){return d.toLocaleDateString("fr-FR",{day:"numeric",month:"short"})}
+function portions(who){return PEOPLE.reduce((a,p)=>a+(who.includes(p.id)?p.w:0),0)}
+function fmtQ(q){return Math.round(q*10)/10}
 
-function nav(){
-  const items=[["plan","📅","Semaine"],["rec","📖","Recettes"],["course","🛒","Courses"],["more","⚙️","Plus"]];
-  $("#nav").innerHTML=items.map(i=>`<button class="${view===i[0]?"on":""}" onclick="go('${i[0]}')"><span>${i[1]}</span>${i[2]}</button>`).join("");
+// ---------- Rendu ----------
+function render(){
+  const nav=$("#nav");
+  const tabs=[["plan","📅","Planning"],["rec","📖","Recettes"],["shop","🛒","Courses"],["more","⚙️","Plus"]];
+  nav.innerHTML=tabs.map(t=>`<button class="${tab===t[0]?"on":""}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join("");
+  if(tab==="plan")renderPlan();
+  else if(tab==="rec")renderRecipes();
+  else if(tab==="shop")renderShop();
+  else renderMore();
 }
-function go(v){view=v;render()}
-function render(){nav();({plan:rPlan,rec:rRec,course:rCourse,more:rMore})[view]()}
+function go(t){tab=t;render();window.scrollTo(0,0)}
 
-/* ---------- PLANNING ---------- */
-function rPlan(){
-  $("#title").textContent="📅 Planning de la semaine";
-  let h=`<p class="hint">Touchez un créneau pour choisir une recette. Décochez qui mange pour ajuster les quantités.</p>`;
-  DAYS.forEach((dn,d)=>{
-    h+=`<div class="card day"><h3>${dn}</h3>`;
-    SLOTS.forEach(([sk,sl])=>{
-      const e=S.plan[key(d,sk)];
-      const r=e&&getR(e.rid);
-      const who=e?PEOPLE.filter(p=>e.who[p[0]]).map(p=>p[1]).join(", "):"";
-      h+=`<div class="slot" onclick="openSlot(${d},'${sk}')">
-        <div class="lbl">${sl}</div>
-        <div class="meal">${r?`<b>${esc(r.nom)}</b><div class="meta">${who||"Personne"} · ${e.lieu==="travail"?"💼 travail":"🏠 maison"}${e.lieu==="travail"?" · micro-ondes":""}</div>`:`<span class="empty">+ ajouter</span>`}</div>
-      </div>`;
+function renderPlan(){
+  const plan=getPlan();
+  const end=new Date(curWeek);end.setDate(end.getDate()+6);
+  let h=`<div class="wk"><button onclick="chWeek(-1)">‹</button><b>${fmtDate(curWeek)} – ${fmtDate(end)}</b><button onclick="chWeek(1)">›</button></div>`;
+  h+=`<div class="tip">💡 Touche un créneau pour choisir une recette, les personnes présentes et le lieu. Une collation vers 17h30 aide à tenir jusqu'au dîner tardif.</div>`;
+  DAYS.forEach((dn,di)=>{
+    const date=new Date(curWeek);date.setDate(date.getDate()+di);
+    h+=`<div class="card"><h3>${dn} <span style="font-weight:400;color:var(--mu);font-size:13px">${fmtDate(date)}</span></h3>`;
+    SLOTS.forEach((s,si)=>{
+      const e=plan[slotKey(di,s.id)];
+      const r=e&&e.rid?recipeById(e.rid):null;
+      let body;
+      if(e&&e.skip)body=`<span class="empty">Pas à planifier</span>`;
+      else if(r){
+        const who=e.who.map(w=>PEOPLE.find(p=>p.id===w).label).join(", ");
+        body=`<b>${esc(r.name)}</b><span class="meta">${who||"personne"} · ${e.where==="work"?"🏢 travail":"🏠 maison"} · ${r.time} min</span>`;
+      } else if(e&&e.free)body=`<b>${esc(e.free)}</b><span class="meta">repas libre</span>`;
+      else body=`<span class="empty">+ Ajouter</span>`;
+      h+=`<div class="slot ${si===0?"first":""}" onclick="openSlot(${di},'${s.id}')"><div class="lbl">${s.ico} ${s.label}</div><div class="meal">${body}</div></div>`;
     });
     h+=`</div>`;
   });
-  h+=`<button class="s" style="width:100%" onclick="if(confirm('Vider tout le planning ?')){S.plan={};save();render()}">Vider la semaine</button>`;
+  h+=`<button class="btn sec" onclick="copyPrev()">Copier la semaine précédente</button><button class="btn dng" onclick="clearWeek()">Vider la semaine</button>`;
   $("#app").innerHTML=h;
 }
+function chWeek(n){curWeek.setDate(curWeek.getDate()+7*n);render()}
+function copyPrev(){
+  const prev=new Date(curWeek);prev.setDate(prev.getDate()-7);
+  const p=S.plans[wkId(prev)];
+  if(!p){alert("Rien à copier la semaine précédente.");return}
+  if(!confirm("Remplacer cette semaine par la précédente ?"))return;
+  S.plans[wkId(curWeek)]=JSON.parse(JSON.stringify(p));save();render();
+}
+function clearWeek(){if(confirm("Vider toute cette semaine ?")){S.plans[wkId(curWeek)]={};save();render()}}
 
-function openSlot(d,sk){
-  const cur=S.plan[key(d,sk)];
-  modalCtx={d,sk,rid:cur?cur.rid:null,who:cur?{...cur.who}:{moi:true,copine:true,bebe:true},lieu:cur?cur.lieu:"maison"};
-  drawSlot();$("#modal").classList.add("show");
+// ---------- Modale créneau ----------
+let slotState=null;
+function openSlot(d,s){
+  const e=getPlan()[slotKey(d,s)];
+  slotState=e?JSON.parse(JSON.stringify(e)):{rid:null,who:["moi","copine","bebe"],where:"home"};
+  slotState.d=d;slotState.s=s;
+  drawSlot();
 }
 function drawSlot(){
-  const c=modalCtx;
-  const recs=S.recettes.filter(r=>{
-    const t=r.tags.join(" ");
-    if(c.sk==="pdj")return t.includes("Petit-déj");
-    if(c.sk==="col")return t.includes("Collation")||t.includes("Petit-déj");
-    return !t.includes("Petit-déj")&&!(t.includes("Collation")&&!t.includes("Rapide"));
-  });
-  let h=`<h3 style="margin-top:0">${DAYS[c.d]} · ${SLOTS.find(s=>s[0]===c.sk)[1]}</h3>
-  <label>Qui mange ?</label><div class="chips">`+
-  PEOPLE.map(p=>`<div class="chip ${c.who[p[0]]?"on":""}" onclick="modalCtx.who['${p[0]}']=!modalCtx.who['${p[0]}'];drawSlot()">${p[1]}</div>`).join("")+`</div>
-  <label>Où ?</label><div class="chips">
-  <div class="chip ${c.lieu==="maison"?"on":""}" onclick="modalCtx.lieu='maison';drawSlot()">🏠 Maison</div>
-  <div class="chip ${c.lieu==="travail"?"on":""}" onclick="modalCtx.lieu='travail';drawSlot()">💼 Travail</div></div>
-  <label>Recette</label>`;
-  recs.forEach(r=>{
-    h+=`<div class="card" style="${c.rid===r.id?"border-color:var(--g);background:var(--g2)":""}" onclick="modalCtx.rid='${r.id}';drawSlot()">
-      <b>${esc(r.nom)}</b><div class="meta">⏱ ${r.tps} min</div>${r.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>`;
-  });
-  h+=`<div class="row" style="margin-top:8px">
-    <button class="p" style="flex:1" onclick="saveSlot()">Valider</button>
-    <button class="s" onclick="clearSlot()">Retirer</button>
-    <button class="s" onclick="closeM()">Annuler</button></div>`;
-  $("#sheet").innerHTML=h;
+  const st=slotState;
+  const slotLabel=SLOTS.find(x=>x.id===st.s).label;
+  const opts=S.recipes.map(r=>`<option value="${r.id}" ${st.rid===r.id?"selected":""}>${esc(r.name)} (${r.time} min)</option>`).join("");
+  const m=document.createElement("div");m.className="modal";m.id="modal";
+  m.innerHTML=`<div>
+  <h3 style="margin-top:0">${DAYS[st.d]} · ${slotLabel}</h3>
+  <label>Recette</label>
+  <select id="m_rid"><option value="">— Choisir —</option>${opts}</select>
+  <label>Ou repas libre (sans recette)</label>
+  <input id="m_free" placeholder="ex : restaurant, restes…" value="${esc(st.free||"")}">
+  <label>Qui mange ?</label>
+  <div class="chips">${PEOPLE.map(p=>`<div class="chip ${st.who.includes(p.id)?"on":""}" onclick="togWho('${p.id}')">${p.label}</div>`).join("")}</div>
+  <label>Où ?</label>
+  <div class="chips">
+    <div class="chip ${st.where==="home"?"on":""}" onclick="setWhere('home')">🏠 Maison</div>
+    <div class="chip ${st.where==="work"?"on":""}" onclick="setWhere('work')">🏢 À emporter (micro-ondes)</div>
+  </div>
+  <div style="margin-top:12px">
+    <button class="btn" onclick="saveSlot()">Enregistrer</button>
+    <button class="btn sec" onclick="skipSlot()">Pas à planifier</button>
+    <button class="btn dng" onclick="delSlot()">Effacer</button>
+    <button class="btn sec" onclick="closeModal()">Annuler</button>
+  </div></div>`;
+  const old=$("#modal");if(old)old.remove();
+  document.body.appendChild(m);
 }
+function keepInputs(){
+  const r=$("#m_rid"),f=$("#m_free");
+  if(r)slotState.rid=r.value||null;
+  if(f)slotState.free=f.value;
+}
+function togWho(id){keepInputs();const i=slotState.who.indexOf(id);if(i>=0)slotState.who.splice(i,1);else slotState.who.push(id);drawSlot()}
+function setWhere(w){keepInputs();slotState.where=w;drawSlot()}
 function saveSlot(){
-  const c=modalCtx;if(!c.rid){alert("Choisissez une recette");return}
-  S.plan[key(c.d,c.sk)]={rid:c.rid,who:c.who,lieu:c.lieu};
-  save();closeM();render();
+  keepInputs();
+  const k=slotKey(slotState.d,slotState.s);
+  const plan=getPlan();
+  if(!slotState.rid&&!slotState.free){delete plan[k]}
+  else plan[k]={rid:slotState.rid,free:slotState.rid?"":slotState.free,who:slotState.who,where:slotState.where};
+  save();closeModal();render();
 }
-function clearSlot(){delete S.plan[key(modalCtx.d,modalCtx.sk)];save();closeM();render()}
-function closeM(){$("#modal").classList.remove("show")}
-$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeM()});
+function skipSlot(){getPlan()[slotKey(slotState.d,slotState.s)]={skip:true,who:[]};save();closeModal();render()}
+function delSlot(){delete getPlan()[slotKey(slotState.d,slotState.s)];save();closeModal();render()}
+function closeModal(){const m=$("#modal");if(m)m.remove()}
 
-/* ---------- RECETTES ---------- */
-function rRec(){
-  $("#title").textContent="📖 Recettes";
-  let h=`<button class="p" style="width:100%;margin-bottom:12px" onclick="editRec()">+ Nouvelle recette</button>`;
-  S.recettes.forEach(r=>{
-    h+=`<div class="card" onclick="editRec('${r.id}')"><b>${esc(r.nom)}</b>
-    <div class="meta">⏱ ${r.tps} min ${r.batch?"· 🍲 batch":""}</div>
+// ---------- Recettes ----------
+let recFilter="";
+function renderRecipes(){
+  const q=recFilter.toLowerCase();
+  const list=S.recipes.filter(r=>!q||r.name.toLowerCase().includes(q)||r.tags.join(" ").toLowerCase().includes(q));
+  let h=`<input placeholder="🔍 Rechercher (ex : batch, rapide, collation…)" value="${esc(recFilter)}" oninput="recFilter=this.value;renderRecipes()" id="rsearch">
+  <button class="btn" onclick="newRecipe()">+ Nouvelle recette</button>`;
+  list.forEach(r=>{
+    h+=`<div class="card" onclick="viewRecipe('${r.id}')"><b>${esc(r.name)}</b> ${r.batch?"📦":""}<br>
+    <span class="meta" style="font-size:12px;color:var(--mu)">⏱ ${r.time} min · ${r.ing.length} ingrédients</span><br>
     ${r.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
   });
   $("#app").innerHTML=h;
+  const i=$("#rsearch");if(i&&recFilter){i.focus();i.setSelectionRange(recFilter.length,recFilter.length)}
 }
-function editRec(id){
-  const r=id?getR(id):{id:uid(),nom:"",tps:15,batch:false,tags:[],ing:[]};
-  const txt=r.ing.map(i=>`${i[0]};${i[1]};${i[2]};${i[3]}`).join("\n");
-  $("#sheet").innerHTML=`<h3 style="margin-top:0">${id?"Modifier":"Nouvelle"} recette</h3>
-  <label>Nom</label><input id="f_nom" value="${esc(r.nom)}">
-  <label>Temps (min)</label><input id="f_tps" type="number" value="${r.tps}">
-  <label>Tags (séparés par des virgules ; ex: Petit-déj, Batch, Bébé OK, Collation, Travail)</label><input id="f_tags" value="${esc(r.tags.join(", "))}">
-  <label><input type="checkbox" id="f_batch" style="width:auto" ${r.batch?"checked":""}> Se prête au batch cooking</label>
-  <label style="display:block;margin-top:8px">Ingrédients pour <b>1 adulte</b>, un par ligne :<br><code>nom;quantité;unité;rayon</code></label>
-  <textarea id="f_ing" rows="6" placeholder="Riz;70;g;Épicerie">${esc(txt)}</textarea>
-  <div class="hint">Rayons : ${CATS.join(" / ")}</div>
-  <div class="row"><button class="p" style="flex:1" onclick="saveRec('${r.id}',${!!id})">Enregistrer</button>
-  ${id?`<button class="d" onclick="delRec('${r.id}')">Supprimer</button>`:""}
-  <button class="s" onclick="closeM()">Annuler</button></div>`;
-  $("#modal").classList.add("show");
+function viewRecipe(id){
+  const r=recipeById(id);
+  const m=document.createElement("div");m.className="modal";m.id="modal";
+  m.innerHTML=`<div><h3 style="margin-top:0">${esc(r.name)}</h3>
+  <p style="color:var(--mu);font-size:13px">⏱ ${r.time} min ${r.batch?"· 📦 Batch cooking":""}</p>
+  <b>Ingrédients (1 adulte)</b>
+  <ul>${r.ing.map(i=>`<li>${fmtQ(i.q)} ${esc(i.u)} ${esc(i.n)}</li>`).join("")}</ul>
+  <b>Préparation</b><p>${esc(r.steps||"—")}</p>
+  <button class="btn" onclick="editR('${r.id}')">Modifier</button>
+  <button class="btn dng" onclick="delR('${r.id}')">Supprimer</button>
+  <button class="btn sec" onclick="closeModal()">Fermer</button></div>`;
+  document.body.appendChild(m);
 }
-function saveRec(id,exist){
-  const nom=$("#f_nom").value.trim();if(!nom){alert("Nom requis");return}
-  const ing=$("#f_ing").value.split("\n").map(l=>l.split(";").map(x=>x.trim())).filter(a=>a[0]).map(a=>[a[0],parseFloat((a[1]||"1").replace(",","."))||1,a[2]||"",CATS.includes(a[3])?a[3]:"Autre"]);
-  const r={id,nom,tps:parseInt($("#f_tps").value)||15,batch:$("#f_batch").checked,tags:$("#f_tags").value.split(",").map(t=>t.trim()).filter(Boolean),ing};
-  if(exist)S.recettes=S.recettes.map(x=>x.id===id?r:x);else S.recettes.push(r);
-  save();closeM();render();
+function newRecipe(){editRecipe={id:"u"+Date.now(),name:"",time:15,tags:[],batch:false,ing:[],steps:""};drawEdit(true)}
+function editR(id){closeModal();editRecipe=JSON.parse(JSON.stringify(recipeById(id)));drawEdit(false)}
+function drawEdit(isNew){
+  closeModal();
+  const r=editRecipe;
+  const m=document.createElement("div");m.className="modal";m.id="modal";
+  m.innerHTML=`<div><h3 style="margin-top:0">${isNew?"Nouvelle recette":"Modifier la recette"}</h3>
+  <label>Nom</label><input id="e_name" value="${esc(r.name)}">
+  <label>Temps (min)</label><input id="e_time" type="number" value="${r.time}">
+  <label>Tags (séparés par des virgules)</label><input id="e_tags" value="${esc(r.tags.join(", "))}">
+  <label><input type="checkbox" id="e_batch" ${r.batch?"checked":""} style="width:auto"> Batch cooking</label><br>
+  <label>Ingrédients pour 1 adulte — un par ligne : <i>quantité ; unité ; nom ; rayon</i><br>Ex : <i>150 ; g ; Brocoli ; Fruits & légumes</i></label>
+  <textarea id="e_ing" rows="6">${esc(r.ing.map(i=>[i.q,i.u,i.n,i.c].join(" ; ")).join("\n"))}</textarea>
+  <div style="font-size:11px;color:var(--mu);margin-bottom:6px">Rayons : ${CATS.join(" / ")}</div>
+  <label>Préparation</label><textarea id="e_steps" rows="4">${esc(r.steps)}</textarea>
+  <button class="btn" onclick="saveR()">Enregistrer</button>
+  <button class="btn sec" onclick="closeModal()">Annuler</button></div>`;
+  document.body.appendChild(m);
 }
-function delRec(id){
+function saveR(){
+  const r=editRecipe;
+  r.name=$("#e_name").value.trim();
+  if(!r.name){alert("Donne un nom à la recette.");return}
+  r.time=parseInt($("#e_time").value)||0;
+  r.tags=$("#e_tags").value.split(",").map(t=>t.trim()).filter(Boolean);
+  r.batch=$("#e_batch").checked;
+  r.steps=$("#e_steps").value;
+  r.ing=$("#e_ing").value.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{
+    const p=l.split(";").map(x=>x.trim());
+    const c=CATS.includes(p[3])?p[3]:"Autre";
+    return {q:parseFloat((p[0]||"1").replace(",","."))||1,u:p[1]||"pièce",n:p[2]||p[0],c:c};
+  });
+  const i=S.recipes.findIndex(x=>x.id===r.id);
+  if(i>=0)S.recipes[i]=r;else S.recipes.push(r);
+  save();closeModal();render();
+}
+function delR(id){
   if(!confirm("Supprimer cette recette ?"))return;
-  S.recettes=S.recettes.filter(r=>r.id!==id);
-  Object.keys(S.plan).forEach(k=>{if(S.plan[k].rid===id)delete S.plan[k]});
-  save();closeM();render();
+  S.recipes=S.recipes.filter(r=>r.id!==id);save();closeModal();render();
 }
 
-/* ---------- COURSES ---------- */
-function compute(){
-  const map={};
-  Object.values(S.plan).forEach(e=>{
-    const r=getR(e.rid);if(!r)return;
-    const f=PEOPLE.reduce((a,p)=>a+(e.who[p[0]]?p[2]:0),0);
-    if(f===0)return;
-    r.ing.forEach(([n,q,u,c])=>{
-      const k=(n+"|"+u).toLowerCase();
-      if(!map[k])map[k]={n,u,c,q:0};
-      map[k].q+=q*f;
+// ---------- Courses ----------
+function buildShopping(){
+  const plan=getPlan();const map={};
+  Object.values(plan).forEach(e=>{
+    if(!e||!e.rid||e.skip)return;
+    const r=recipeById(e.rid);if(!r)return;
+    const p=portions(e.who);if(p<=0)return;
+    r.ing.forEach(i=>{
+      const k=(i.n+"|"+i.u).toLowerCase();
+      if(!map[k])map[k]={n:i.n,u:i.u,c:i.c,q:0,k:k};
+      map[k].q+=i.q*p;
     });
   });
-  return Object.entries(map).map(([k,v])=>({k,...v}));
+  return Object.values(map);
 }
-function fmt(q){q=Math.ceil(q*2)/2;return q%1===0?q:q.toFixed(1)}
-function rCourse(){
-  $("#title").textContent="🛒 Liste de courses";
-  const auto=compute();
-  let h=`<div class="card"><div class="row"><input id="newit" placeholder="Ajouter un article…" style="margin:0"><button class="p" onclick="addExtra()">+</button></div></div>`;
-  if(!auto.length&&!S.extra.length)h+=`<p class="hint">Planifiez des repas : la liste se remplit toute seule.</p>`;
-  CATS.forEach(cat=>{
-    const a=auto.filter(i=>i.c===cat),x=S.extra.filter(i=>i.c===cat);
-    if(!a.length&&!x.length)return;
-    h+=`<h2 class="cat">${cat}</h2><div class="card" style="padding:4px 12px">`;
-    a.forEach(i=>{const d=S.checked[i.k];h+=`<div class="li ${d?"done":""}"><input type="checkbox" ${d?"checked":""} onchange="tgl('${esc(i.k).replace(/'/g,"\\'")}')"><span>${esc(i.n)}</span><small>${fmt(i.q)} ${esc(i.u)}</small></div>`});
-    x.forEach((i,ix)=>{const d=S.checked["x"+i.id];h+=`<div class="li ${d?"done":""}"><input type="checkbox" ${d?"checked":""} onchange="tgl('x${i.id}')"><span>${esc(i.n)}</span><button class="d" onclick="delX(${i.id})">✕</button></div>`});
-    h+=`</div>`;
+function renderShop(){
+  const wid=wkId(curWeek);
+  if(!S.shop[wid])S.shop[wid]={};
+  const checks=S.shop[wid];
+  const auto=buildShopping();
+  const extras=S.extra.filter(x=>x.w===wid);
+  let h=`<div class="wk"><button onclick="chWeek(-1);">‹</button><b>Semaine du ${fmtDate(curWeek)}</b><button onclick="chWeek(1);">›</button></div>
+  <div style="display:flex;gap:6px"><input id="addItem" placeholder="Ajouter un article…" style="margin:0"><button class="btn" onclick="addItem()" style="margin:0">+</button></div>`;
+  const byCat={};
+  auto.forEach(i=>{(byCat[i.c]=byCat[i.c]||[]).push({label:`${fmtQ(i.q)} ${i.u} ${i.n}`,k:i.k,extra:false})});
+  extras.forEach(x=>{(byCat["Autre"]=byCat["Autre"]||[]).push({label:x.t,k:"x_"+x.id,extra:true,id:x.id})});
+  const cats=CATS.filter(c=>byCat[c]);
+  if(!cats.length)h+=`<p class="empty" style="margin-top:20px">La liste se remplit toute seule quand tu ajoutes des recettes au planning.</p>`;
+  cats.forEach(c=>{
+    h+=`<div class="cat">${c}</div>`;
+    byCat[c].forEach(i=>{
+      const d=checks[i.k];
+      h+=`<div class="row ${d?"done":""}"><input type="checkbox" ${d?"checked":""} onchange="togShop('${i.k.replace(/'/g,"\\'")}')"><span class="t">${esc(i.label)}</span>${i.extra?`<button class="x" onclick="delExtra('${i.id}')">✕</button>`:""}</div>`;
+    });
   });
-  h+=`<div class="row"><button class="s" style="flex:1" onclick="S.checked={};save();render()">Tout décocher</button>
-  <button class="s" style="flex:1" onclick="shareList()">📤 Partager</button></div>`;
+  h+=`<div style="margin-top:16px"><button class="btn sec" onclick="shareList()">📤 Partager la liste</button><button class="btn sec" onclick="uncheckAll()">Tout décocher</button></div>
+  <p style="font-size:12px;color:var(--mu)">Bébé compte pour 0,4 portion. Vérifie ton frigo/placards avant d'acheter (sel, huile, épices…).</p>`;
   $("#app").innerHTML=h;
 }
-function tgl(k){S.checked[k]=!S.checked[k];save();render()}
-function addExtra(){const v=$("#newit").value.trim();if(!v)return;S.extra.push({id:Date.now(),n:v,c:"Autre"});save();render()}
-function delX(id){S.extra=S.extra.filter(i=>i.id!==id);save();render()}
+function togShop(k){const c=S.shop[wkId(curWeek)];c[k]=!c[k];save();renderShop()}
+function addItem(){
+  const v=$("#addItem").value.trim();if(!v)return;
+  S.extra.push({id:Date.now()+"",w:wkId(curWeek),t:v});save();renderShop();
+}
+function delExtra(id){S.extra=S.extra.filter(x=>x.id!==id);save();renderShop()}
+function uncheckAll(){S.shop[wkId(curWeek)]={};save();renderShop()}
 function shareList(){
-  const lines=[];compute().forEach(i=>{if(!S.checked[i.k])lines.push(`- ${i.n} : ${fmt(i.q)} ${i.u}`)});
-  S.extra.forEach(i=>{if(!S.checked["x"+i.id])lines.push("- "+i.n)});
-  const t="🛒 Courses\n"+lines.join("\n");
-  if(navigator.share)navigator.share({text:t});else{navigator.clipboard.writeText(t);alert("Liste copiée")}
+  const wid=wkId(curWeek);const checks=S.shop[wid]||{};
+  const lines=["🛒 Courses – semaine du "+fmtDate(curWeek)];
+  const byCat={};
+  buildShopping().forEach(i=>{if(!checks[i.k])(byCat[i.c]=byCat[i.c]||[]).push(`${fmtQ(i.q)} ${i.u} ${i.n}`)});
+  S.extra.filter(x=>x.w===wid&&!checks["x_"+x.id]).forEach(x=>(byCat["Autre"]=byCat["Autre"]||[]).push(x.t));
+  CATS.forEach(c=>{if(byCat[c]){lines.push("","— "+c);byCat[c].forEach(l=>lines.push("• "+l))}});
+  const txt=lines.join("\n");
+  if(navigator.share)navigator.share({text:txt}).catch(()=>{});
+  else if(navigator.clipboard){navigator.clipboard.writeText(txt);alert("Liste copiée dans le presse-papiers.")}
+  else prompt("Copie la liste :",txt);
 }
 
-/* ---------- PLUS ---------- */
-function rMore(){
-  $("#title").textContent="⚙️ Plus";
-  const nb=Object.keys(S.plan).length;
+// ---------- Plus ----------
+function renderMore(){
   $("#app").innerHTML=`
-  <div class="card"><b>💡 Astuces pour votre rythme</b>
-  <ul style="padding-left:18px;font-size:14px;line-height:1.5">
-  <li><b>Creux 14h → 21h :</b> prévoyez une collation protéinée vers 17h (yaourt grec + noix, houmous + légumes) pour éviter le grignotage et le gros repas tardif.</li>
-  <li><b>Petit frigo :</b> cuisinez 2 batchs par semaine (3 portions chacun) et congelez le reste en portions.</li>
-  <li><b>Travail :</b> choisissez des plats micro-ondables (tag « Micro-ondable ») ou froids (« Travail »).</li>
-  <li><b>Bébé :</b> pas de sel ajouté, pas de miel, textures adaptées à 17 mois.</li></ul></div>
-  <div class="card"><b>💾 Sauvegarde & synchro</b>
-  <p class="hint">Les données sont stockées sur ce téléphone. Pour les passer sur celui de votre copine :</p>
-  <div class="row"><button class="s" style="flex:1" onclick="exportD()">Exporter</button>
-  <button class="s" style="flex:1" onclick="$('#imp').click()">Importer</button></div>
-  <input type="file" id="imp" accept=".json" style="display:none" onchange="importD(event)"></div>
-  <div class="card"><b>Statistiques</b><p class="hint">${nb} repas planifiés · ${S.recettes.length} recettes</p>
-  <button class="d" onclick="if(confirm('Tout réinitialiser ?')){localStorage.removeItem('menusApp');location.reload()}">Réinitialiser l'app</button></div>`;
+  <div class="card"><h3>💾 Sauvegarde & partage entre téléphones</h3>
+  <p style="font-size:13px;color:var(--mu)">Les données sont stockées sur ce téléphone. Pour les transférer vers l'autre téléphone (ou faire une sauvegarde), exporte puis importe.</p>
+  <button class="btn" onclick="exportData()">Exporter (copier)</button>
+  <button class="btn sec" onclick="importData()">Importer (coller)</button></div>
+  <div class="card"><h3>🍼 Rappels bébé (17 mois)</h3>
+  <p style="font-size:13px">Pas de sel ajouté, épices douces, morceaux adaptés à sa capacité à mâcher. Fer (légumineuses, œufs, viande), poisson 2×/semaine. En cas de doute, demande à votre pédiatre.</p></div>
+  <div class="card"><h3>⏰ Astuce jours décalés</h3>
+  <p style="font-size:13px">Si tu manges à 14h et dînes à 21h30 : prévois une collation protéines + fibres vers 17h30 (skyr, œuf dur, fromage + fruit, houmous + crudités). Si le petit-déj est à 9h-10h, rends-le consistant.</p></div>
+  <div class="card"><h3>⚠️ Zone sensible</h3>
+  <button class="btn dng" onclick="resetAll()">Tout réinitialiser</button></div>`;
 }
-function exportD(){
-  const b=new Blob([JSON.stringify(S)],{type:"application/json"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="menus-backup.json";a.click();
+function exportData(){
+  const txt=JSON.stringify(S);
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>alert("Données copiées. Colle-les dans un message pour les envoyer.")).catch(()=>prompt("Copie ce texte :",txt))}
+  else prompt("Copie ce texte :",txt);
 }
-function importD(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(d.v===1){S=d;save();render();alert("Importé ✅")}}catch(x){alert("Fichier invalide")}};
-  r.readAsText(f);
+function importData(){
+  const t=prompt("Colle ici les données exportées :");
+  if(!t)return;
+  try{const o=JSON.parse(t);if(!o.recipes)throw 0;if(!confirm("Remplacer toutes les données de ce téléphone ?"))return;S=o;save();render();alert("Import réussi.")}
+  catch(e){alert("Données invalides.")}
 }
-function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&","<":"<",">":">",'"':"""}[c]))}
+function resetAll(){if(confirm("Effacer toutes les données et revenir aux recettes de départ ?")){localStorage.removeItem(KEY);S=load();render()}}
 
 render();
 </script>
